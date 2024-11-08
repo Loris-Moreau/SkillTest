@@ -24,10 +24,13 @@ void ASkillTestCharacter::Tick(float DeltaTime)
 float ASkillTestCharacter::TakeDamage(float DamageAmount, FDamageEvent const& DamageEvent, AController* EventInstigator,
                                       AActor* DamageCauser)
 {
-	if (Affinity != Cast<ASkillTestCharacter>(DamageCauser)->Affinity)
+	if(Cast<ASkillTestCharacter>(DamageCauser)->Affinity)
 	{
-		Health -= DamageAmount;
-		UE_LOG(LogTemp, Warning, TEXT("%s received damages : %f"), *this->GetName(), Health);
+		if (Affinity != Cast<ASkillTestCharacter>(DamageCauser)->Affinity)
+		{
+			Health -= DamageAmount;
+			UE_LOG(LogTemp, Warning, TEXT("%s received damages : %f"), *this->GetName(), Health);
+		}
 	}
 
 	return Super::TakeDamage(DamageAmount, DamageEvent, EventInstigator, DamageCauser);
