@@ -25,7 +25,7 @@ float ASkillTestCharacter::TakeDamage(float DamageAmount, FDamageEvent const& Da
 	AActor* DamageCauser)
 {
 	Health -= DamageAmount;
-	UE_LOG(LogTemp, Warning, TEXT("Damages applied : %f"), Health);
+	UE_LOG(LogTemp, Warning, TEXT("%s received damages : %f"), *this->GetName(), Health);
 	
 	return Super::TakeDamage(DamageAmount, DamageEvent, EventInstigator, DamageCauser);
 }
