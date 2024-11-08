@@ -1,6 +1,5 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
-
 #include "SkillTestCharacter.h"
 
 // Sets default values
@@ -8,27 +7,25 @@ ASkillTestCharacter::ASkillTestCharacter()
 {
  	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
-
 }
 
 // Called when the game starts or when spawned
 void ASkillTestCharacter::BeginPlay()
 {
-	Super::BeginPlay();
-	
+	Super::BeginPlay();	
 }
 
 // Called every frame
 void ASkillTestCharacter::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-
 }
 
-// Called to bind functionality to input
-void ASkillTestCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
+float ASkillTestCharacter::TakeDamage(float DamageAmount, FDamageEvent const& DamageEvent, AController* EventInstigator,
+	AActor* DamageCauser)
 {
-	Super::SetupPlayerInputComponent(PlayerInputComponent);
-
+	Health -= DamageAmount;
+	UE_LOG(LogTemp, Warning, TEXT("Damages applied : %f"), Health);
+	
+	return Super::TakeDamage(DamageAmount, DamageEvent, EventInstigator, DamageCauser);
 }
-

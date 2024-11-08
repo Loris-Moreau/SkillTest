@@ -6,24 +6,38 @@
 #include "GameFramework/Character.h"
 #include "SkillTestCharacter.generated.h"
 
+UENUM()
+enum ECharacterAffinity
+{
+	Undefined,
+	Ally,
+	Enemy
+};
+
 UCLASS()
 class SKILLTEST_M4_API ASkillTestCharacter : public ACharacter
 {
 	GENERATED_BODY()
 
+	// FUNCTIONS
 public:
 	// Sets default values for this character's properties
 	ASkillTestCharacter();
+
+	// Called every frame
+	virtual void Tick(float DeltaTime) override;
+	
+	virtual float TakeDamage(float DamageAmount, struct FDamageEvent const& DamageEvent, class AController* EventInstigator, AActor* DamageCauser) override;
 
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
-public:	
-	// Called every frame
-	virtual void Tick(float DeltaTime) override;
+	//VARIABLES
+public:
+	UPROPERTY(BlueprintReadOnly)
+	TEnumAsByte<ECharacterAffinity> Affinity;
 
-	// Called to bind functionality to input
-	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
-
+	UPROPERTY(BlueprintReadWrite)
+	float Health = 100.f;
 };
